@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "gowebcehui",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "currentFileConfiguration": true,
+            "cwd": "${fileDirname}",
+            "justMyCode": true,
+            "addSourceRootsToPythonpath": true
+        }
+    ]
+}
