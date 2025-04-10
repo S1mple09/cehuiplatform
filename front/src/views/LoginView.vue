@@ -16,14 +16,15 @@ const submitForm = async () => {
   try {
     const response = await axios.post('http://127.0.0.1:9001/api/login', form.value)
     localStorage.setItem('token', response.data.token)
-    // 登录成功动画
+    const authStore = useAuthStore()
+    authStore.login(response.data.user)
+
     document.querySelector('.login-container').classList.add('success')
     setTimeout(() => {
       router.push('/dashboard')
     }, 1000)
   } catch (err) {
     error.value = err.response?.data?.error || '登录失败'
-    // 错误震动效果
     document.querySelector('.login-container').classList.add('shake')
     setTimeout(() => {
       document.querySelector('.login-container').classList.remove('shake')
@@ -41,33 +42,33 @@ const submitForm = async () => {
         <h2>欢迎回来</h2>
         <p>请登录您的账户</p>
       </div>
-      
+
       <form @submit.prevent="submitForm">
         <div class="form-group floating">
           <input v-model="form.username" type="text" id="username" required>
           <label for="username">用户名</label>
           <div class="underline"></div>
         </div>
-        
+
         <div class="form-group floating">
           <input v-model="form.password" type="password" id="password" required>
           <label for="password">密码</label>
           <div class="underline"></div>
         </div>
-        
+
         <button type="submit" :disabled="isLoading">
           <span v-if="!isLoading">登 录</span>
           <span v-else class="loader"></span>
         </button>
-        
+
         <p v-if="error" class="error">{{ error }}</p>
       </form>
-      
+
     <div class="login-footer">
         <p>还没有账号? <router-link to="/register">立即注册</router-link></p>
     </div>
     </div>
-    
+
     <div class="particles"></div>
   </div>
 </template>

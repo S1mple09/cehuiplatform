@@ -42,18 +42,30 @@
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import ProfileModal from '../components/ProfileModal.vue'
-
+import axios from 'axios'
+import { useRouter } from 'vue-router'
 export default {
   components: { ProfileModal },
   setup() {
-    const authStore = useAuthStore()
-    const user = ref({})
-    const searchQuery = ref('')
-    const showProfileModal = ref(false)
+  const authStore = useAuthStore()
+  const router = useRouter()
+  const user = ref({})
+  const searchQuery = ref('')
+  const showProfileModal = ref(false)
 
-    onMounted(() => {
-      user.value = authStore.user
-    })
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:9001/api/profile')
+      user.value = response.data
+    } catch (error) {
+      console.error('获取用户数据失败:', error)
+      router.push('/login')
+    }
+  }
+
+  onMounted(() => {
+    fetchUserData()
+  })
 
     const handleSearch = () => {
       // 实现搜索逻辑

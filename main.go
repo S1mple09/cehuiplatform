@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"old/api"
 	"old/database" // 修改为正确的路径
-	// "old/middleware" // 修改为正确的路径
-	// "old/models"     // 修改为正确的路径
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -15,6 +13,7 @@ import (
 
 func main() {
 	// 配置CORS
+
 	config := cors.Config{
 		AllowOrigins:     []string{"*"},                                                         // 允许所有来源访问
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},                   // 允许的HTTP方法

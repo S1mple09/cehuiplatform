@@ -3,7 +3,8 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <RouterView />
+  <p>asdsad</p>
+  <router-view></router-view>
 </template>
 
 <style>
